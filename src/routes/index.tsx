@@ -182,7 +182,7 @@ function Home() {
     return () => window.clearInterval(id);
   }, []);
 
-  const slide = slides[active];
+  const slide = slides[active] ?? slides[0]!;
 
   return (
     <div className="overflow-x-hidden">
