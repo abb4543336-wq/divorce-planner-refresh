@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { Reveal } from "@/components/Reveal";
@@ -6,7 +6,7 @@ import heroPortrait from "@/assets/hero-portrait.jpg";
 import analysisImg from "@/assets/analysis.jpg";
 import couplePlanning from "@/assets/couple-planning.jpg";
 import mediationImg from "@/assets/mediation.jpg";
-import mark from "@/assets/adp-mark.png";
+import { PHONE_HREF, PHONE_LABEL, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,9 +30,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Home,
 });
-
-const PHONE = "tel:5129636883";
-const PHONE_LABEL = "(512) 963-6883";
 
 const slides = [
   {
@@ -154,14 +151,6 @@ const reviews = [
   },
 ];
 
-const navLinks = [
-  { href: "#approach", label: "Approach" },
-  { href: "#services", label: "Services" },
-  { href: "#process", label: "Process" },
-  { href: "#reviews", label: "Reviews" },
-  { href: "#consultation", label: "Consultation" },
-];
-
 function Stars() {
   return (
     <div className="flex gap-1" aria-hidden="true">
@@ -186,37 +175,7 @@ function Home() {
 
   return (
     <div className="overflow-x-hidden">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-md">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-          <a href="#top" className="flex items-center gap-3">
-            <img src={mark} alt="Austin Divorce Planners" width={40} height={40} className="h-9 w-9" />
-            <span className="font-display text-sm leading-tight font-semibold tracking-tight">
-              Austin Divorce
-              <br />
-              Planners
-            </span>
-          </a>
-          <nav className="hidden items-center gap-8 lg:flex">
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="text-sm font-medium text-ink-soft transition-colors hover:text-brass"
-              >
-                {l.label}
-              </a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-3">
-            <a href={PHONE} className="hidden text-sm font-semibold text-ink sm:block">
-              {PHONE_LABEL}
-            </a>
-            <a href="#consultation" className="btn-base btn-ink px-5 py-2.5 text-sm">
-              Schedule Consultation
-            </a>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* Hero */}
       <section id="top" className="relative ink-panel pt-32 pb-20 lg:pt-40 lg:pb-28">
@@ -239,10 +198,10 @@ function Home() {
               {slide.body}
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a href="#consultation" className="btn-base btn-brass">
+              <Link to="/contact" className="btn-base btn-brass">
                 Schedule Consultation
-              </a>
-              <a href={PHONE} className="btn-base btn-outline-light">
+              </Link>
+              <a href={PHONE_HREF} className="btn-base btn-outline-light">
                 Call ADP Now
               </a>
             </div>
@@ -362,9 +321,9 @@ function Home() {
                   </div>
                 ))}
               </div>
-              <a href="#consultation" className="btn-base btn-brass mt-10 w-full">
-                Schedule Consultation
-              </a>
+               <Link to="/services" className="btn-base btn-brass mt-10 w-full">
+                 Explore All Services
+               </Link>
             </div>
           </Reveal>
         </div>
@@ -430,10 +389,10 @@ function Home() {
               planning, aiming for a stable future beyond the proceedings.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <a href="#consultation" className="btn-base btn-ink">
+               <Link to="/contact" className="btn-base btn-ink">
                 Schedule Consultation
-              </a>
-              <a href={PHONE} className="btn-base btn-outline-ink">
+               </Link>
+               <a href={PHONE_HREF} className="btn-base btn-outline-ink">
                 Call {PHONE_LABEL}
               </a>
             </div>
@@ -515,10 +474,10 @@ function Home() {
               </p>
             </div>
             <div className="mt-9 flex flex-wrap gap-4">
-              <a href="#consultation" className="btn-base btn-ink">
+               <Link to="/contact" className="btn-base btn-ink">
                 Schedule Consultation
-              </a>
-              <a href={PHONE} className="btn-base btn-outline-ink">
+               </Link>
+               <a href={PHONE_HREF} className="btn-base btn-outline-ink">
                 Call ADP Now
               </a>
             </div>
@@ -548,11 +507,11 @@ function Home() {
                 don't hesitate to reach out. Act fast to secure your spot.
               </p>
               <div className="mt-10 flex flex-wrap gap-4">
-                <a href={PHONE} className="btn-base btn-ink">
+                 <a href={PHONE_HREF} className="btn-base btn-ink">
                   Call Keith at ADP — {PHONE_LABEL}
                 </a>
                 <a
-                  href={PHONE}
+                   href={PHONE_HREF}
                   className="btn-base border border-accent-foreground/30 text-accent-foreground hover:bg-accent-foreground/10"
                 >
                   Reach out to schedule
@@ -563,51 +522,7 @@ function Home() {
         </Reveal>
       </section>
 
-      <footer className="ink-panel border-t border-white/10">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-3">
-          <div>
-            <div className="flex items-center gap-3">
-              <img src={mark} alt="" width={40} height={40} loading="lazy" className="h-9 w-9" />
-              <span className="font-display text-sm leading-tight font-semibold">
-                Austin Divorce
-                <br />
-                Planners
-              </span>
-            </div>
-            <p className="mt-5 max-w-xs text-sm text-white/60">
-              Divorce financial planning by a Certified Divorce Financial Analyst™ and Certified
-              Financial Planner® — serving Austin and all of Texas.
-            </p>
-          </div>
-          <div>
-            <p className="eyebrow">Explore</p>
-            <ul className="mt-4 space-y-3 text-sm text-white/70">
-              {navLinks.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} className="transition-colors hover:text-brass">
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="eyebrow">Get in touch</p>
-            <ul className="mt-4 space-y-3 text-sm text-white/70">
-              <li>
-                <a href={PHONE} className="transition-colors hover:text-brass">
-                  {PHONE_LABEL}
-                </a>
-              </li>
-              <li>Austin, Texas — serving all of Texas</li>
-              <li>Initial consultation: $100</li>
-            </ul>
-          </div>
-        </div>
-        <div className="border-t border-white/10 py-6 text-center text-xs text-white/45">
-          © {new Date().getFullYear()} Austin Divorce Planners. All rights reserved.
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
